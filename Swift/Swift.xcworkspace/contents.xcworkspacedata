@@ -5,6 +5,9 @@
       location = "group:Swift-4.playground">
    </FileRef>
    <FileRef
+      location = "group:Swift-5.playground">
+   </FileRef>
+   <FileRef
       location = "group:Swift-5.1.playground">
    </FileRef>
 </Workspace>
