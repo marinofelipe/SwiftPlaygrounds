@@ -16,13 +16,13 @@
 /*:
 ## Proposal
 
-The Swift Evolution proposal for Identifiable [SE-0261](https://github.com/apple/swift-evolution/blob/master/proposals/0261-identifiable.md).
+The Swift Evolution proposal for Identifiable: [SE-0261](https://github.com/apple/swift-evolution/blob/master/proposals/0261-identifiable.md).
  */
 
 /*:
 ## References / Bibliografy
 
-The examples and analyses is heavily based on:
+The examples and analyses are heavily inspired by:
  - [Identifiable](https://nshipster.com/identifiable/) - by NSHipster, August, 26, 2019
  */
 
