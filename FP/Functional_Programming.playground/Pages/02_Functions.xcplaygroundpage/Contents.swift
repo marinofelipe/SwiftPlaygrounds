@@ -10,7 +10,7 @@ TODO: Description
 ## References / Bibliografy
 
 The examples and analyses is heavily based on:
- - [Point Free - Episode 1 - Functions](https://github.com/pointfreeco/episode-code-samples/tree/master/0001-functions)
+ - [Point Free - Episode 1 - Functions](https://www.pointfree.co/episodes/ep1-functions)
 */
 
 /*:
