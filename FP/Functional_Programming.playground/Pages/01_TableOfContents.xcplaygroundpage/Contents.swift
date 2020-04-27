@@ -11,9 +11,9 @@
 
  ## Contents
 
- 1. [02_Functions](Functions)
- 1. [03_SideEffects](Side Effects)
-
+ 1. [Functions](02_Functions)
+ 1. [Side Effects](03_SideEffects)
+ 1. [UIKit Styling with functions](04_UIKitStyling)
 */
 
 //: [Next page](@next)

@@ -4,5 +4,6 @@
         <page name='01_TableOfContents'/>
         <page name='02_Functions'/>
         <page name='03_SideEffects'/>
+        <page name='04_UIKitStyling'/>
     </pages>
 </playground>

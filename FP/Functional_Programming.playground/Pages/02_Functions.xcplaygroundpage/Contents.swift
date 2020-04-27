@@ -1,9 +1,5 @@
 /*:
  # Functions
-
-TODO: Description
-
- > TODO: if any
  */
 
 /*:
@@ -14,14 +10,7 @@ The examples and analyses is heavily based on:
 */
 
 /*:
-##  Learnings and Thoughts
-
- TODO:
-*/
-
-/*:
-##  Freeplay
-
+##  Content
 */
 
 // free functions
