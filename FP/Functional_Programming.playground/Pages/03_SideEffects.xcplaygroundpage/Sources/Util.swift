@@ -38,10 +38,10 @@ public func >>> <A, B, C>(
   return { g(f($0)) }
 }
 
-//public func incr(_ x: Int) -> Int {
-//  return x + 1
-//}
-//
-//public func square(_ x: Int) -> Int {
-//  return x * x
-//}
+public func incr(_ x: Int) -> Int {
+  return x + 1
+}
+
+public func square(_ x: Int) -> Int {
+  return x * x
+}
