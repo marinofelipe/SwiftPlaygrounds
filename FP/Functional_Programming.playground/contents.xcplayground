@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<playground version='6.0' target-platform='ios' display-mode='raw' executeOnSourceChanges='true'>
+<playground version='6.0' target-platform='ios' display-mode='rendered' executeOnSourceChanges='true'>
     <pages>
         <page name='01_TableOfContents'/>
         <page name='02_Functions'/>
         <page name='03_SideEffects'/>
         <page name='04_UIKitStyling'/>
+        <page name='05_AlgebraDataTypes'/>
+        <page name='05_Exercises'/>
     </pages>
 </playground>

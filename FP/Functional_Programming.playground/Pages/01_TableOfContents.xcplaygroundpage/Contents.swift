@@ -14,6 +14,7 @@
  1. [Functions](02_Functions)
  1. [Side Effects](03_SideEffects)
  1. [UIKit Styling with functions](04_UIKitStyling)
+ 1. [Algebra Data Types](05_AlgebraDataTypes)
 */
 
 //: [Next page](@next)
