@@ -9,9 +9,9 @@
 
  1. [Keynote](Keynote)
  1. [Platforms State of The Union](StatOfTheUnion)
- 1. [Session 1](Session1)
- 1. [Session 2](Session2)
- 1. [Session 3](Session3)
+ 1. [What's new in Swift](WhatsNewInSwift)
+ 1. [Data Essentials in SwiftUI](DataEssentialsInSwiftUI)
+ 1. [What's New In SwiftUI](WhatsNewInSwiftUI)
  1. [Session 4](Session4)
 */
 

@@ -9,10 +9,23 @@
 /*:
 ## Key Points
 
- *
- *
- *
- *
+**iOS**
+ * Home-screen & App libraries
+ * PIP
+ * Siri showing information / widgets
+ * Translate app - looks good
+ * Maps improved - HAS GUDES
+ * App clips (How to adopt for GYG app) - Less than 10MB
+ * Sign-in with Apple
+
+**iPadOS**
+ * Scribble
+
+**watchOS**
+  *
+
+**macOS**
+ * 
 */
 
 /*:
