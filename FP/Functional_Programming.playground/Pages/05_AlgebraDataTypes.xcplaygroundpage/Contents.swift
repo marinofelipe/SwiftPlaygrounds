@@ -6,7 +6,7 @@
 ## References / Bibliografy
 
 The examples and analyses is heavily based on:
- - [Point Free - Episode 34- Algebra Data Types Functions](https://www.pointfree.co/episodes/ep4-algebraic-data-types)
+ - [Point Free - Episode 4- Algebra Data Types Functions](https://www.pointfree.co/episodes/ep4-algebraic-data-types)
 
  Related to uninhabited types:
  - [Swift Evolution - SE0102 - Remove @noreturn attribute and introduce an empty Never type](https://github.com/apple/swift-evolution/blob/master/proposals/0102-noreturn-bottom-type.md)
@@ -227,8 +227,6 @@ import Foundation
 // Result<Date, Never>
 
 // Result<A, Error>? // optional cause can be cancelled
-
-/* EXERCISES */
 
 //: [Previous](@previous) |
 //: [Next](@next)

@@ -1,5 +1,5 @@
 /*:
- # Algebraic Data Types Exercises
+ # Algebraic Data Types - Exercises
 
  1. What algebraic operation does the function type `(A) -> B` correspond to? Try explicitly enumerating all the values of some small cases like `(Bool) -> Bool`, `(Unit) -> Bool`, `(Bool) -> Three` and `(Three) -> Bool` to get some intuition.
  */
@@ -112,15 +112,34 @@ __
 /*:
  5. Swift allows you to pass types, like `A.self`, to functions that take arguments of `A.Type`. Overload the `*` and `+` infix operators with functions that take any type and build up an algebraic representation using `Pair` and `Either`. Explore how the precedence rules of both operators manifest themselves in the resulting types.
  */
-//infix operator *
 func *<A: Any, B: Any>(_ a: A.Type, b: B.Type) {
     let pair: Pair<A.Type, B.Type> = Pair(first: a, second: b)
     debugPrint(pair.first)
     debugPrint(pair.second)
+
+    // results
+    // A * B
 }
 
 //infix operator +
 func +<A: Any, B: Any>(_ a: A.Type, b: B.Type) {
     let either: Either<A.Type, B.Type>
-    // 
+    //
+
+    // results
+    // A + B
+
+//    let a = 1
+//    let b = 2
+//
+//    1 + 2
 }
+
+/*:
+References:
+ * [Swift Advanced Operators](https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html)
+ * [Swift Operator Declarations](https://developer.apple.com/documentation/swift/swift_standard_library/operator_declarations)
+*/
+
+//: [Previous](@previous) |
+//: [Next](@next)

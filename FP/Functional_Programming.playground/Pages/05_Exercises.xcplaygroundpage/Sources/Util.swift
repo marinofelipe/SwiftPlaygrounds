@@ -38,7 +38,3 @@ public enum Either<A, B> {
 }
 
 public struct Unit: Equatable {}
-
-public var __: Void {
-    print("--")
-}

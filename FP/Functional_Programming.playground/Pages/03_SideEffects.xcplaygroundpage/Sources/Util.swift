@@ -1,8 +1,5 @@
 import XCTest
 
-// NB: `@_exported` will make foundation available in our playgrounds
-@_exported import Foundation
-
 @discardableResult
 public func assertEqual<A: Equatable>(_ lhs: A, _ rhs: A) -> String {
   return lhs == rhs ? "✅" : "❌"
@@ -11,10 +8,6 @@ public func assertEqual<A: Equatable>(_ lhs: A, _ rhs: A) -> String {
 @discardableResult
 public func assertEqual<A: Equatable, B: Equatable>(_ lhs: (A, B), _ rhs: (A, B)) -> String {
   return lhs == rhs ? "✅" : "❌"
-}
-
-public var __: Void {
-  print("--")
 }
 
 precedencegroup ForwardApplication {
