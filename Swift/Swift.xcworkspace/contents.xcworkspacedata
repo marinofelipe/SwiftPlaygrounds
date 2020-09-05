@@ -10,4 +10,7 @@
    <FileRef
       location = "group:Swift-5.1.playground">
    </FileRef>
+   <FileRef
+      location = "group:SwiftUI.playground">
+   </FileRef>
 </Workspace>
