@@ -6,7 +6,7 @@
 ## References / Bibliografy
 
 The examples and analyses is heavily based on:
- - [Point Free - Episode 5 - Algebra Data Types Functions](https://www.pointfree.co/episodes/ep5-higher-order-functions)
+ - [Point Free - Episode 5 - Higher Order Functions](https://www.pointfree.co/episodes/ep5-higher-order-functions)
 
  Curry function is named after Haskell Curry - mathematician that popularized the idea of currying.
  - [Haskell Curry - Wikipedia](https://en.wikipedia.org/wiki/Haskell_Curry)

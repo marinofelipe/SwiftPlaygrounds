@@ -9,5 +9,7 @@
         <page name='05_Exercises'/>
         <page name='06_HigherOrderFunctions'/>
         <page name='06_Exercises'/>
+        <page name='07_FunctionalSetters'/>
+        <page name='07_Exercises'/>
     </pages>
 </playground>

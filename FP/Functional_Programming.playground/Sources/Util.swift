@@ -56,3 +56,31 @@ public func incr(_ x: Int) -> Int {
 public func square(_ x: Int) -> Int {
   return x * x
 }
+
+// MARK: - High order funcs
+
+public func curry<A, B, C>(_ f: @escaping (A, B) -> C) -> (A) -> (B) -> C {
+  return { a in
+    { b in
+        f(a, b)
+    }
+  }
+}
+
+public func zurry<A>(_ f: () -> A) -> A {
+    return f()
+}
+
+public func flip<A, B, C>(_ f: @escaping (A) -> (B) -> C) -> (B) -> (A) -> C {
+  return { b in { a in f(a)(b) } }
+}
+
+// A version of flip with zero arguments
+
+public func flip<A, C>(_ f: @escaping (A) -> () -> C) -> () -> (A) -> C {
+  return { { a in f(a)() } }
+}
+
+public func |> <A>(a: inout A, f: (inout A) -> Void) -> Void {
+    f(&a)
+}
