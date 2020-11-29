@@ -17,6 +17,7 @@
  1. [Algebra Data Types](05_AlgebraDataTypes)
  1. [Higher Order Functions](06_HigherOrderFunctions)
  1. [Functional Setters](07_FunctionalSetters)
+ 1. [Setters and KeyPaths](08_SettersAndKeyPaths)
 */
 
 //: [Next page](@next)

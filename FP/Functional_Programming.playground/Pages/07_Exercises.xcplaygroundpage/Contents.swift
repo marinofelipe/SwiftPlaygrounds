@@ -6,7 +6,29 @@
  1. As we saw with free map on Array, define free map on Optional and use it to compose setters that traverse into an optional field.
 */
 
+func first<A, B, C>(_ f: @escaping (A) -> C) -> ((A, B)) -> (C, B) {
+    return { pair in
+        (f(pair.0), pair.1)
+    }
+}
 
+func second<A, B, C>(_ f: @escaping (B) -> C) -> ((A, B)) -> (A, C) {
+    return { pair in
+        (pair.0, f(pair.1))
+    }
+}
+
+func map<A, B>(_ f: @escaping (A) -> B) -> (A?) -> (B?) {
+    {
+        $0.map(f)
+    }
+}
+
+let tupleWithOptionalPropos: (Int, [String?]) = (42, ["Swift", "Objective-C"])
+
+tupleWithOptionalPropos
+    |> (second <<< map) { $0?.uppercased() }
+    |> first(incr)
 
 /*:
  2. Take a struct, e.g.:

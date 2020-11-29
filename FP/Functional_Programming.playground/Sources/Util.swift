@@ -25,7 +25,7 @@ public func >>> <A, B, C>(f: @escaping (A) -> B, g: @escaping (B) -> C) -> (A) -
 }
 
 precedencegroup SingleTypeComposition {
-  associativity: right
+  associativity: left
   higherThan: ForwardApplication
 }
 infix operator <>: SingleTypeComposition
@@ -46,6 +46,14 @@ public func <> <A: AnyObject>(f: @escaping (A) -> Void, g: @escaping (A) -> Void
   }
 }
 
+precedencegroup BackwardsComposition {
+    associativity: left
+}
+infix operator <<<
+public func <<< <A, B, C>(_ f: @escaping (B) -> C, _ g: @escaping (A) -> B) -> (A) -> C {
+    return { f(g($0)) }
+}
+
 // MARK: - Funcs
 
 // free functions
@@ -55,6 +63,20 @@ public func incr(_ x: Int) -> Int {
 
 public func square(_ x: Int) -> Int {
   return x * x
+}
+
+// for tuples
+
+public func first<A, B, C>(_ f: @escaping (A) -> C) -> ((A, B)) -> (C, B) {
+    return { pair in
+        (f(pair.0), pair.1)
+    }
+}
+
+public func second<A, B, C>(_ f: @escaping (B) -> C) -> ((A, B)) -> (A, C) {
+    return { pair in
+        (pair.0, f(pair.1))
+    }
 }
 
 // MARK: - High order funcs
@@ -83,4 +105,9 @@ public func flip<A, C>(_ f: @escaping (A) -> () -> C) -> () -> (A) -> C {
 
 public func |> <A>(a: inout A, f: (inout A) -> Void) -> Void {
     f(&a)
+}
+
+// free map
+public func map<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {
+  return { $0.map(f) }
 }

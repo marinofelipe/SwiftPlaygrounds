@@ -15,12 +15,12 @@ The examples and analyses is heavily based on:
 
 import UIKit
 
-func <> <A: AnyObject>(f: @escaping (A) -> Void, g: @escaping (A) -> Void) -> (A) -> Void {
-  return { a in
-    f(a)
-    g(a)
-  }
-}
+//func <> <A: AnyObject>(f: @escaping (A) -> Void, g: @escaping (A) -> Void) -> (A) -> Void {
+//  return { a in
+//    f(a)
+//    g(a)
+//  }
+//}
 
 // base
 

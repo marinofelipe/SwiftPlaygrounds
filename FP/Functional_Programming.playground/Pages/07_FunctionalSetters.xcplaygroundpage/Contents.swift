@@ -157,6 +157,7 @@ let data = [
 
 data.map { ($0.0, $0.1.map { $0 + "!" }) }
 
+
 // MARK: - What's the point
 
 /// Is it worth introducing these functions to our code bases?
