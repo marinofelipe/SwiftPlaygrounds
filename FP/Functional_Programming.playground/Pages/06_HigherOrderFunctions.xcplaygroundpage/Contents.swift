@@ -110,9 +110,9 @@ func zurry<A>(_ f: () -> A) -> A {
     .map(incr)
     .map(square)
 
-func map<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> ([B]) {
-    return { $0.map(f) }
-}
+//func map<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> ([B]) {
+//    return { $0.map(f) }
+//}
 
 map(incr)
 map(square)
@@ -123,9 +123,9 @@ Array(1...10)
     .filter { $0 > 5 }
 
 // With free funcs
-func filter<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> ([A]) {
-    return { $0.filter(p) }
-}
+//func filter<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> ([A]) {
+//    return { $0.filter(p) }
+//}
 
 Array(1...10)
     |> filter { $0 > 5 }

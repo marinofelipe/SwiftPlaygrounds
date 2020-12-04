@@ -111,3 +111,11 @@ public func |> <A>(a: inout A, f: (inout A) -> Void) -> Void {
 public func map<A, B>(_ f: @escaping (A) -> B) -> ([A]) -> [B] {
   return { $0.map(f) }
 }
+
+public func map<A, B>(_ f: @escaping (A) -> B) -> (A?) -> B? {
+  return { $0.map(f) }
+}
+
+public func filter<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> ([A]) {
+    return { $0.filter(p) }
+}
