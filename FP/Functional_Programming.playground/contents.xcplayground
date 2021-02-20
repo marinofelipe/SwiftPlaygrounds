@@ -13,5 +13,7 @@
         <page name='07_Exercises'/>
         <page name='08_SettersAndKeyPaths'/>
         <page name='08_Exercises'/>
+        <page name='09_GettersAndKeyPaths'/>
+        <page name='09_Exercises'/>
     </pages>
 </playground>
