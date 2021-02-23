@@ -1,5 +1,3 @@
-//: [Previous](@previous)
-
 /*:
  # Getters and Key Paths - Exercises
 */
@@ -25,11 +23,19 @@ struct Person {
     let age: Int
 }
 
-let people: [Person?] = [
-    .init(name: "Rafael", age: 39),
-    .init(name: "Gabi", age: 30),
-    nil
+let people = [
+    Person(name: "Rafael", age: 39),
+    Person(name: "Gabi", age: 30)
 ]
+
+people
+    .map(\.name)
+
+people
+    .map { $0.name }
+
+people
+    .flatMap(\.name)
 
 //let ages = people
 //    .compactMap(\Person.self)
@@ -73,4 +79,6 @@ let people: [Person?] = [
  8. Given a value in `EnumKeyPath<A, B>` and a value in `EnumKeyPath<A, C>`, can you construct a value in `EnumKeyPath<A, Either<B, C>>`?
  */
 // TODO
+
+//: [Previous](@previous)
 //: [Next](@next)

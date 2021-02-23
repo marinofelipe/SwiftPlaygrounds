@@ -15,5 +15,7 @@
         <page name='08_Exercises'/>
         <page name='09_GettersAndKeyPaths'/>
         <page name='09_Exercises'/>
+        <page name='10_AlgebraicDataTypesExponents'/>
+        <page name='10_Exercises'/>
     </pages>
 </playground>

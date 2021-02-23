@@ -18,6 +18,8 @@
  1. [Higher Order Functions](06_HigherOrderFunctions)
  1. [Functional Setters](07_FunctionalSetters)
  1. [Setters and KeyPaths](08_SettersAndKeyPaths)
+ 1. [Getters and KeyPaths](09_GettersAndKeyPaths)
+ 1. [Algebraic Data Types: Exponents](10_AlgebraicDataTypesExponents)
 */
 
 //: [Next page](@next)
