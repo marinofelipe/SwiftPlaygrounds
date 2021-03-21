@@ -17,5 +17,7 @@
         <page name='09_Exercises'/>
         <page name='10_AlgebraicDataTypesExponents'/>
         <page name='10_Exercises'/>
+        <page name='11_ManyFacesOfMap'/>
+        <page name='11_Exercises'/>
     </pages>
 </playground>
