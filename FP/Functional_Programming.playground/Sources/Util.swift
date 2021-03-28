@@ -119,3 +119,12 @@ public func map<A, B>(_ f: @escaping (A) -> B) -> (A?) -> B? {
 public func filter<A>(_ p: @escaping (A) -> Bool) -> ([A]) -> ([A]) {
     return { $0.filter(p) }
 }
+
+// Operator created prio to the introduction of KeyPath as functions SE-0249:
+// https://github.com/apple/swift-evolution/blob/main/proposals/0249-key-path-literal-function-expressions.md
+
+prefix operator ^
+
+public prefix func ^ <Root, Value>(kp: KeyPath<Root, Value>) -> (Root) -> Value {
+  return { $0[keyPath: kp] }
+}

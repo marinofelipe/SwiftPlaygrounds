@@ -114,10 +114,10 @@ func zurry<A>(_ f: () -> A) -> A {
 //    return { $0.map(f) }
 //}
 
-map(incr)
-map(square)
-map(incr) >>> map(square) >>> map(String.init) // not performant
-map(incr >>> square >>> String.init)
+Utils.map(incr)
+Utils.map(square)
+Utils.map(incr) >>> map(square) >>> map(String.init) // not performant
+Utils.map(incr >>> square >>> String.init)
 
 Array(1...10)
     .filter { $0 > 5 }

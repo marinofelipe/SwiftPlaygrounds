@@ -19,5 +19,7 @@
         <page name='10_Exercises'/>
         <page name='11_ManyFacesOfMap'/>
         <page name='11_Exercises'/>
+        <page name='12_Contravariance'/>
+        <page name='12_Exercises'/>
     </pages>
 </playground>

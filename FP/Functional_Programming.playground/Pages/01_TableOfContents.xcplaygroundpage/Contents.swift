@@ -21,15 +21,7 @@
  1. [Getters and KeyPaths](09_GettersAndKeyPaths)
  1. [Algebraic Data Types: Exponents](10_AlgebraicDataTypesExponents)
  1. [The Many Faces of Map](11_ManyFacesOfMap)
+ 1. [Contravariance](12_Contravariance)
 */
 
 //: [Next page](@next)
-
-let nsStrings: [NSString] = ["a", "b"]
-let nsStrings2: [NSString] = ["a", "b"]
-nsStrings == nsStrings2
-
-
-let nsNumbers: [NSNumber] = [1, 2]
-let nsNumbers2: [NSNumber] = [1, 2]
-nsNumbers == nsNumbers2
