@@ -21,5 +21,7 @@
         <page name='11_Exercises'/>
         <page name='12_Contravariance'/>
         <page name='12_Exercises'/>
+        <page name='13_ProtocolWitnesses'/>
+        <page name='13_Exercises'/>
     </pages>
 </playground>

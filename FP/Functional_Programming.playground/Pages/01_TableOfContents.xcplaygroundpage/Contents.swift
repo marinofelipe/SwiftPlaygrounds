@@ -5,7 +5,7 @@
 
  This playground contains Swift **Functional Programming** content.
 
- Here you will find handy code samples, explanations and concepts of usage.
+ Here you will find handy code sample   s, explanations and concepts of usage.
 
  Most of them are part of learnings from community articles, API's (e.g. Combine), and more. The references can be find within each content :).
 
@@ -22,6 +22,7 @@
  1. [Algebraic Data Types: Exponents](10_AlgebraicDataTypesExponents)
  1. [The Many Faces of Map](11_ManyFacesOfMap)
  1. [Contravariance](12_Contravariance)
+ 1. [Protocol Witnesses](13_ProtocolWitnesses)
 */
 
 //: [Next page](@next)
