@@ -3,5 +3,7 @@
     <pages>
         <page name='01_TableOfContents'/>
         <page name='02_StrengthenedTypes'/>
+        <page name='03_NavigationSystem'/>
+        <page name='04_ProtocolWitnesses'/>
     </pages>
 </playground>

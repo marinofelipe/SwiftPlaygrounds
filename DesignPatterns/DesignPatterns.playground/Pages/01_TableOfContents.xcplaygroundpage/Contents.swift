@@ -10,6 +10,7 @@
  ## Contents
 
  1. [Strengthened Types](02_StrengthenedTypes)
+ 1. [Navigation System](03_NavigationSystem)
 */
 
 //: [Next page](@next)

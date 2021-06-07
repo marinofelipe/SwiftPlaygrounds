@@ -99,7 +99,27 @@ print(
  8.) Protocols can inherit from other protocols, for example the Comparable protocol inherits from the Equatable protocol. How does this translate to an explicit datatype to represent the protocol?
  */
 
-// TODO
+extension Equating where A == Int {
+    static let int = Equating(isEqualTo: ==)
+
+    static func array(of equating: Equating<A>) -> Equating<[A]> {
+        .init { lhs, rhs in
+            guard lhs.count == rhs.count else { return false }
+            for (a, b) in zip(lhs, rhs) {
+                if !equating.isEqualTo(a, b) { return false }
+            }
+            return true
+        }
+    }
+
+    func pullback<B>(_ f: @escaping (B) -> A) -> Equating<B> {
+        .init { lhs, rhs in
+            self.isEqualTo(f(lhs), f(rhs))
+        }
+    }
+}
+
+// TODO:
 
 /*:
  9.) Translate the Comparable protocol into an explicit datatype struct Comparing. You will need to use the previous exercise to do this.

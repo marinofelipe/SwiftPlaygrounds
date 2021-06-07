@@ -8,6 +8,7 @@
 Heavily inspired/based on:
  - [Point Free - Episode 33](https://www.pointfree.co/collections/protocol-witnesses/alternatives-to-protocols/ep33-protocol-witnesses-part-1)
  - [Point Free - Episode 34](https://www.pointfree.co/collections/protocol-witnesses/alternatives-to-protocols/ep34-protocol-witnesses-part-2)
+ - [Point Free - Episode 35](https://www.pointfree.co/episodes/ep35-advanced-protocol-witnesses-part-1)
 */
 
 /*:
@@ -535,6 +536,168 @@ let secureCompactWitnessV2 = compactWitness // type inference also works out of 
         }
     )
 secureCompactWitnessV2.describe(localhostPostgres)
+
+__
+
+// MARK: - Advanced Protocol Witnesses
+
+// 💡 No global properties
+
+extension Combining where A: Numeric {
+    static var sum: Combining {
+        .init(combine: +)
+    }
+    static var product: Combining {
+        .init(combine: *)
+    }
+}
+
+extension EmptyInitializing where A: Numeric {
+    static var zero: EmptyInitializing {
+        .init { 0 }
+    }
+    static var one: EmptyInitializing {
+        .init { 1 }
+    }
+}
+
+[1.1, 2, 3, 4].reduce(.zero, .sum)    // 10.1
+[1.1, 2, 3, 4].reduce(.one, .product) // 26.4
+
+__
+
+extension Describing where A == PostgresConnInfo {
+  static let compact = Describing {
+    "PostgresConnInfo(database: \"\($0.database)\", hostname: \"\($0.hostname)\", password: \"\($0.password)\", port: \"\($0.port)\", user: \"\($0.user)\")"
+  }
+
+  static let pretty = Describing {
+      """
+      PostgresConnInfo(
+        database: \"\($0.database)\",
+        hostname: \"\($0.hostname)\",
+        password: \"\($0.password)\",
+        port: \"\($0.port)\",
+        user: \"\($0.user)\"
+      )
+      """
+  }
+}
+
+print(tag: "debug", localhostPostgres, .compact)
+
+extension Describing where A == Bool {
+    static var compact: Describing {
+        .init { $0 ? "t" : "f" }
+    }
+
+    static var pretty: Describing {
+        .init { $0 ? "𝓣𝓻𝓾𝓮" : "𝓕𝓪𝓵𝓼𝓮" }
+    }
+}
+
+print(tag: "debug", true, .compact)
+print(tag: "debug", true, .pretty)
+
+// 💡 Composition in "data type" oriented approach is amazing and feels much more close
+// to the type system than what is usually done or achievable in a Protocol oriented manner
+
+// MARK: - Conditional conformance
+
+//extension Array: Equatable where Element: Equatable {
+//    //...
+//}
+
+//protocol Equatable {
+//    static func == (lhs: Self, rhs: Self) -> Bool
+//}
+
+// "So let’s move on to seeing what other amazing things concrete types and witnesses can do.
+// One of the most requested of features for Swift back in the day
+// was that of “conditional conformance.” It’s what allows you to express the idea of generic
+// types conforming to a protocol if the type // parameter also conforms to some protocol.
+// The most classic example is that of arrays of equatable should be equatable,
+// which was not possible to express until Swift 4.1, about 4 years after Swift was first announced.
+//
+// - Point Free - episode 35
+
+struct Equating<A> {
+    let equals: (A, A) -> Bool
+}
+
+extension Equating where A == Int {
+//    static let int = Equating { $0 == $1 }
+    static let int = Equating(equals: ==)
+}
+
+//func array<A>(_ equating: Equating<A>) -> Equating<[A]> {
+//    .init { lhs, rhs in
+//        guard lhs.count == rhs.count else { return false }
+//
+//        for (lhs, rhs) in zip(lhs, rhs) {
+//            if !equating.equals(lhs, rhs) {
+//                return false
+//            }
+//        }
+//
+//        return true
+//    }
+//}
+//
+//array(.int).equals([], [])      // true
+//array(.int).equals([1], [1])   // true
+//array(.int).equals([1], [1, 2]) // false
+
+// baking that up into the type
+
+extension Equating {
+    static func array(of equating: Equating<A>) -> Equating<[A]> {
+        .init { lhs, rhs in
+            guard lhs.count == rhs.count else { return false }
+            for (a, b) in zip(lhs, rhs) {
+                if !equating.equals(a, b) { return false }
+            }
+            return true
+        }
+    }
+
+    func pullback<B>(_ f: @escaping (B) -> A) -> Equating<B> {
+        .init { lhs, rhs in
+            self.equals(f(lhs), f(rhs))
+        }
+    }
+}
+
+Equating.array(of: .int).equals([], [])      // true
+Equating.array(of: .int).equals([1], [1])    // true
+Equating.array(of: .int).equals([1], [1, 2]) // false
+
+let stringCount = Equating.int.pullback { (s: String) in s.count }
+// Equating<String>
+
+Equating.array(of: stringCount).equals([], [])                // true
+Equating.array(of: stringCount).equals(["Blob"], ["Blob"])    // true
+Equating.array(of: stringCount).equals(["Blob"], ["Bolb"])    // true
+Equating.array(of: stringCount).equals(["Blob"], ["Blob Sr"]) // false
+
+// and it nests
+
+// [[Int]]
+
+[[1, 2], [3, 4]] == [[1, 2], [3, 4, 5]] // false
+[[1, 2], [3, 4]] == [[1, 2], [3, 4]]    // true
+
+(Equating.array >>> Equating.array)(.int)
+
+(Equating.array >>> Equating.array)(.int).equals([[1, 2], [3, 4]], [[1, 2], [3, 4]])    // true
+(Equating.array >>> Equating.array)(.int).equals([[1, 2], [3, 4]], [[1, 2], [3, 4, 5]]) // false
+
+(Equating.array >>> Equating.array)(stringCount)
+    .equals([["Blob", "Blob Jr"]], [["Bolb", "Bolb Jr"]]) // true
+(Equating.array >>> Equating.array)(stringCount)
+    .equals([["Blob", "Blob Jr"]], [["Blob", "Bolb Esq"]]) // false
+
+// Conditional conformance with plain functions 👆🤯
 
 //: [Previous](@previous) |
 //: [Next](@next)
