@@ -3,8 +3,6 @@
     <pages>
         <page name='TableOfContents'/>
         <page name='WhatsNewInSwift'/>
-        <page name='DataEssentialsInSwiftUI'/>
-        <page name='Session3'/>
-        <page name='Session4'/>
+        <page name='MeetAsyncAwait'/>
     </pages>
 </playground>
