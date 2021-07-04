@@ -1,5 +1,3 @@
-import SwiftUI
-
 /*:
  # Meet async/await in Swift
 
