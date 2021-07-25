@@ -699,5 +699,247 @@ Equating.array(of: stringCount).equals(["Blob"], ["Blob Sr"]) // false
 
 // Conditional conformance with plain functions 👆🤯
 
+__
+
+// MARK: - Extending tuples
+
+//extension (Int, Int) { // Non-nominal type '(Int, Int)' cannot be extended
+//    var sum: Int { return self.0 + self.1 }
+//}
+
+//extension (A, B): Equatable where A: Equatable, B: Equatable {
+//    static func ==(lhs: (A, B), rhs: (A, B)) -> Bool {
+//        return lhs.0 == rhs.0 && lhs.1 == rhs.1
+//    }
+//}
+
+//extension Void: Equatable {
+//    static func ==(lhs: Void, rhs: Void) -> Bool {
+//        return true
+//    }
+//}
+
+extension Equating where A == Void {
+    static let void = Equating { _, _ in true }
+}
+
+Equating.array(of: .void).equals([(), ()], [(), ()]) // true
+Equating.array(of: .void).equals([(), ()], [()])     // false
+
+//[(), ()] == [()]
+
+extension Equating {
+    static func tuple<B>(_ a: Equating<A>, _ b: Equating<B>) -> Equating<(A, B)> {
+        Equating<(A, B)> { lhs, rhs in
+            a.equals(lhs.0, rhs.0) && b.equals(lhs.1, rhs.1)
+        }
+    }
+}
+
+Equating.tuple(.int, stringCount)
+// Equating<(Int, String)>
+
+Equating.tuple(.int, stringCount).equals((1, "Blob"), (1, "Bolb"))    // true
+Equating.tuple(.int, stringCount).equals((1, "Blob"), (1, "Blob Jr")) // false
+Equating.tuple(.int, stringCount).equals((1, "Blob"), (2, "Bolb"))    // false
+
+// 💡 Amazing to see the power of data types for things like conditional conformance.
+// Here we can make Tuples Equatable which Swift doesn't have as a language feature yet.
+// And, could be done since Swift 1.
+
+__
+
+// MARK: - Extending functions
+// "Tuples aren’t the only non-nominal types in Swift, functions are also non-nominal."
+
+//extension (A) -> A: Combinable {
+//    func combine(other f: @escaping (A) -> A) -> (A) -> A {
+//        return { a in other(self(a)) }
+//    }
+//}
+
+// workaround is to wrap funcs in a struct
+struct Endo<A>: Combinable {
+    let call: (A) -> A
+    func combine(with other: Endo) -> Endo {
+        Endo { a in other.call(self.call(a)) }
+    }
+}
+
+// However, witnesses have no such problems
+
+extension Combining {
+    // gets to funcs from A -> A and combines then from a new one A -> A
+    static var endo: Combining<(A) -> A> {
+//        Combining<(A) -> A> { f, g in
+//            { a in g(f(a)) }
+//        }
+
+        Combining<(A) -> A>(combine: >>>)
+    }
+}
+
+extension EmptyInitializing {
+    static var identity: EmptyInitializing<(A) -> A> {
+        EmptyInitializing<(A) -> A> {
+            { $0 }
+        }
+    }
+}
+
+let endos: [(Double) -> Double] = [
+    { $0 + 1.0 },
+    { $0 * $0 },
+    sin,
+    { $0 * 1000.0 }
+]
+
+endos.reduce(EmptyInitializing.identity, Combining.endo)
+// (Double) -> Double
+
+endos.reduce(EmptyInitializing.identity, Combining.endo)(3)
+// -287.9033166650653
+
+__
+
+// MARK: - Protocol Inheritance
+
+//protocol Comparable: Equatable {
+//    static func < (lhs: Self, rhs: Self) -> Bool
+//}
+
+struct Comparing<A> {
+    let equating: Equating<A>
+    let compare: (A, A) -> Bool
+}
+
+let intAsc = Comparing(equating: .int, compare: <)
+let intDesc = Comparing(equating: .int, compare: >)
+
+extension Comparing {
+    func pullback<B>(_ f: @escaping (B) -> A) -> Comparing<B> {
+        Comparing<B>(
+            equating: self.equating.pullback(f),
+            compare: { lhs, rhs in
+                self.compare(f(lhs), f(rhs))
+            }
+        )
+    }
+}
+
+struct User { let id: Int, name: String }
+
+//Three different ways of comparing users, all built from the notion of comparing integers.
+// Again we’re seeing functionality that is completely impossible in the protocol world and hidden from us.
+// We would never think to do things like this.
+
+intAsc.pullback(\User.id)  // Comparing<User>
+intDesc.pullback(\User.id) // Comparing<User>
+
+intAsc.pullback(\User.name.count) // Comparing<User>
+
+__
+
+// MARK: - Protocol Extensions
+
+extension Equating {
+    var notEquals: (A, A) -> Bool {
+        { lhs, rhs in
+            !self.equals(lhs, rhs)
+        }
+    }
+}
+
+//public protocol Reusable {
+//    static var reuseIdentifier: String { get }
+//}
+
+//public extension Reusable {
+//    static var reuseIdentifier: String {
+//        return String(describing: self)
+//    }
+//}
+
+import UIKit
+
+class UserCell: UITableViewCell {}
+//class EpisodeCell: UITableViewCell {}
+//extension UserCell: Reusable {}
+//extension EpisodeCell: Reusable {}
+//
+//UserCell.reuseIdentifier    // "UserCell"
+//EpisodeCell.reuseIdentifier // "EpisodeCell"
+
+struct Reusing<A> {
+    let reuseIdentifier: () -> String
+
+    init(reuseIdentifier: @escaping () -> String = { String(describing: A.self) }) {
+        self.reuseIdentifier = reuseIdentifier
+    }
+}
+
+Reusing<UserCell>() // Reusing<UserCell>
+Reusing<UserCell>().reuseIdentifier() // "UserCell"
+
+__
+
+// MARK: - Protocol with Associated Types
+
+//let collections: [Collection] // 🔴 Protocol 'Collection' can only be used as a generic constraint because it has Self or associated type requirements
+
+//public protocol RawRepresentable {
+//    associatedtype RawValue
+//    public init?(rawValue: Self.RawValue)
+//    public var rawValue: Self.RawValue { get }
+//}
+
+enum Directions: String {
+    case down = "D"
+    case left = "L"
+    case right = "R"
+    case up = "U"
+}
+//
+//Directions.down.rawValue // "D"
+//Directions(rawValue: "D") // .some(Directions.down)
+//Directions(rawValue: "X") // nil
+
+struct RawRepresenting<A, RawValue> {
+    let convert: (RawValue) -> A?
+    let rawValue: (A) -> RawValue
+}
+
+// 💡 What stands out to me is that in most cases one main difference from Protocols
+// is that Protocols are conformances applied to instances, while their data type
+// version are static witnesses that are disconnected from instances, but instead
+// just receive and do some transformation to different instances of their generics
+
+extension RawRepresenting where A == Int, RawValue == String {
+    static var stringToInt = RawRepresenting(
+        convert: { Int($0) },
+        rawValue: { "\($0)" }
+    )
+}
+
+extension RawRepresenting where A: RawRepresentable, A.RawValue == RawValue {
+    static var rawRepresentable: RawRepresenting {
+        return RawRepresenting(
+            convert: A.init(rawValue:),
+            rawValue: \.rawValue
+        )
+    }
+}
+
+/// `-` We miss out the synthesized rawValue for simple enums like the example above - a lot of hassle
+/// `+` ??
+
+//extension RawRepresentable where RawValue == Int {
+//    func toString() -> String {
+//        "\(rawValue)"
+//    }
+//}
+
+RawRepresenting<Directions, String>.rawRepresentable
+
 //: [Previous](@previous) |
 //: [Next](@next)

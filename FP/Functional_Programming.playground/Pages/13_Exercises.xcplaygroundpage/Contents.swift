@@ -132,3 +132,55 @@ extension Equating where A == Int {
  */
 
 // TODO
+
+/*:
+ 11.) Currently Swift does not allow protocol methods to contain arguments with default values. For example, the following protocol is not representable in Swift:
+//protocol Service {
+//    func fetchUser(id: Int, cache: Bool = false) -> User?
+//}
+
+ // 🛑 Default argument not permitted in a protocol method
+
+ Show how this can be done with a concrete data type representation of Service.
+ */
+
+struct User { let id: Int, name: String }
+
+struct Service {
+    let fetchUser: (Int, Bool) -> User?
+
+    static func fetch(_ f: Service, cache: Bool = false) -> Service {
+        .init { id, cache -> User? in
+            f.fetchUser(id, cache)
+        }
+    }
+}
+
+let fetchUserService = Service { id, cache -> User? in
+    .init(id: id, name: "name-\(id)")
+}
+
+Service.fetch(fetchUserService, cache: true)
+Service.fetch(fetchUserService) // cache is false
+
+/*:
+ 12.) Currently Swift does not allow protocols to extend other protocols, even if you provide all of the extensions requirements. For example, we cannot extend Numeric to be combinable even though it is easy to implement the requirement:
+
+ extension Numeric: Combinable {
+   func combine(with other: Self) -> Self {
+     return self + other
+   }
+ }
+
+ // 🛑 Extension of protocol 'Numeric' cannot have an inheritance clause
+ Show how this can be done with a concrete data type representation of Service.
+*/
+
+struct Numeric<A> {
+    let numericSum: (A, A) -> A
+    let numericSubtraction: (A, A) -> A
+    let combining: Combining<A>
+}
+
+//let sumNumeric = Numeric<Int>(numeric: +, combining: Combining<Int>(combine: +))
+//sumNumeric.combining
