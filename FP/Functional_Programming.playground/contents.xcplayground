@@ -23,5 +23,6 @@
         <page name='12_Exercises'/>
         <page name='13_ProtocolWitnesses'/>
         <page name='13_Exercises'/>
+        <page name='14_Dependencies'/>
     </pages>
 </playground>

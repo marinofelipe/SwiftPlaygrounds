@@ -23,6 +23,7 @@
  1. [The Many Faces of Map](11_ManyFacesOfMap)
  1. [Contravariance](12_Contravariance)
  1. [Protocol Witnesses](13_ProtocolWitnesses)
+ 1. [Dependencies](14_Dependencies)
 */
 
 //: [Next page](@next)
