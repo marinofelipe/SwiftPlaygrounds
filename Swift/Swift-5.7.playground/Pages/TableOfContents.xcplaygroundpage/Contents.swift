@@ -1,9 +1,9 @@
 /*:
- # Swift 5.1 - Standard Library
+ # Swift 5.7 - Standard Library
 
  ## Intro
 
- This playground contains **Swift 5.1** *Standard Library* additions.
+ This playground contains **Swift 5.7** *Standard Library* additions.
 
  Here you will find handy code samples, explanations and concepts of usage.
 
@@ -11,8 +11,7 @@
 
  ## Contents
 
- 1. [Identifiable](Identifiable)
- 2. [Property Wrappers](PropertyWrappers)
+ 1. [Some](Some)
 
 */
 

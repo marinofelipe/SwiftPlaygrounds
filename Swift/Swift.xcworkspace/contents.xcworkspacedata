@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/marino.felipe/Documents/projects/personal/SwiftPlaygrounds/Swift/Features.playground">
+   </FileRef>
+   <FileRef
       location = "group:Swift-4.playground">
    </FileRef>
    <FileRef
@@ -12,5 +15,8 @@
    </FileRef>
    <FileRef
       location = "group:SwiftUI.playground">
+   </FileRef>
+   <FileRef
+      location = "group:Swift-5.7.playground">
    </FileRef>
 </Workspace>
