@@ -33,11 +33,14 @@ import UIKit
 protocol ViewModelProtocol<ViewState, Action> {
     associatedtype ViewState: Equatable
     associatedtype Action: Equatable
+    associatedtype Environment: Equatable
 
     var viewState: AnyPublisher<ViewState, Never> { get }
 
     func send(_ action: Action)
 }
+
+extension ViewModelProtocol where ViewState
 
 protocol ViewModelThatTracks {
     var tracker: any TrackerProtocol { get }
