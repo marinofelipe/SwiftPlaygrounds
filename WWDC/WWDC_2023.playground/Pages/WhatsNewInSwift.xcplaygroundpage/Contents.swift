@@ -1,3 +1,4 @@
+import Foundation
 
 /*:
  # What's new in Swift
@@ -34,18 +35,19 @@
  ## Expressive code; if and switch as expressions
 */
 
-let attributedName =
-if let displayName, !displayName.isEmpty {
-  AttributedString(markdown: displayName)
+let displayName: Data? = .init()
+
+let attributedName = if let displayName, !displayName.isEmpty {
+  try AttributedString(markdown: displayName)
 } else {
-  "Untitled"
+  AttributedString(stringLiteral: "Untitled")
 }
 
 /*:
  ## Consuming methods
  */
 
-struct FileDescriptor {
+struct FileDescriptor: ~Copyable {
   private var fd: CInt
 
   init(descriptor: CInt) { self.fd = descriptor }
@@ -71,16 +73,26 @@ struct FileDescriptor {
  */
 
 actor MyConnection {
-  private var database: UnsafeMutablePointer<sqlite3>
+  private var database = UnsafeMutablePointer<String>.allocate(capacity: 8)
   private let queue: DispatchSerialQueue
-
+  
   nonisolated var unownedExecutor: UnownedSerialExecutor { queue.asUnownedSerialExecutor() }
+  
+  init(filename: String, queue: DispatchSerialQueue) throws {
+    self.queue = queue
+    // database from filename
+  }
 
-  init(filename: String, queue: DispatchSerialQueue) throws { … }
-
-  func pruneOldEntries() { … }
-  func fetchEntry<Entry>(named: String, type: Entry.Type) -> Entry? { … }
+  func pruneOldEntries() {
+      
+  }
+  
+  func fetchEntry<Entry>(named: String, type: Entry.Type) -> Entry? {
+      nil
+  }
 }
+
+let connection = try MyConnection(filename: "some", queue: .init(label: "some", qos: .utility))
 
 await connection.pruneOldEntries()
 

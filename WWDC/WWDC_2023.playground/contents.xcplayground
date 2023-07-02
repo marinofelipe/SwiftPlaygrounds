@@ -3,5 +3,6 @@
     <pages>
         <page name='TableOfContents'/>
         <page name='WhatsNewInSwift'/>
+        <page name='WhatsNewInXcode15'/>
     </pages>
 </playground>

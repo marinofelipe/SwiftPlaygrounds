@@ -8,6 +8,7 @@
  ## Contents
 
  1. [What's new in Swift](WhatsNewInSwift)
+ 1. [What's new in Xcode 15](WhatsNewInXcode15)
 */
 
 //: [Next page](@next)
