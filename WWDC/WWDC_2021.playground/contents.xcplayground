@@ -4,5 +4,8 @@
         <page name='TableOfContents'/>
         <page name='WhatsNewInSwift'/>
         <page name='MeetAsyncAwait'/>
+        <page name='AsyncAwaitInURLSession'/>
+        <page name='WhatsNewInSwiftUI'/>
+        <page name='Demystify SwiftUI'/>
     </pages>
 </playground>

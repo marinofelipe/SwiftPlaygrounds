@@ -4,5 +4,6 @@
         <page name='TableOfContents'/>
         <page name='WhatsNewInSwift'/>
         <page name='WhatsNewInXcode15'/>
+        <page name='DemystifySwiftUIPerformance'/>
     </pages>
 </playground>
