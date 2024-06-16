@@ -41,46 +41,46 @@ func threadBasics() {
 
 // MARK: - Priority and cancellation
 
-func threadPriorityAndCancellation() {
-    let thread = Thread {
-        let start = Date()
-        defer { print("Finished in", Date().timeIntervalSince(start)) }
-
-        // cancellation state has to be manually checked
-        guard thread.isCancelled == false else {
-            print("Cancelled before interval")
-
-            return
-        }
-
-        print("thread", Thread.current)
-
-        // will wait the full time, even if cancelled
-        Thread.sleep(forTimeInterval: 1)
-
-        // cancellation state has to be manually checked
-        guard thread.isCancelled == false else {
-            print("Cancelled after interval")
-
-            return
-        }
-
-        print("thread prop 2", Thread.current)
-    }
-
-    // 0 to 1 (hidden definition of how threads get prioritized based on that)
-    thread.threadPriority = 0.75
-    thread.start()
-
-    // cancellation does not work as expected.. sleeping less then inside the thread context
-    // still makes the thread block to fully perform its work without being cancelled
-    Thread.sleep(forTimeInterval: 0.01)
-    thread.cancel()
-
-    // freezes main thread, which will make the print on the detached
-    // to be printed
-    Thread.sleep(forTimeInterval: 1.1)
-}
+//func threadPriorityAndCancellation() {
+//    let thread = Thread {
+//        let start = Date()
+//        defer { print("Finished in", Date().timeIntervalSince(start)) }
+//
+//        // cancellation state has to be manually checked
+//        guard thread.isCancelled == false else {
+//            print("Cancelled before interval")
+//
+//            return
+//        }
+//
+//        print("thread", Thread.current)
+//
+//        // will wait the full time, even if cancelled
+//        Thread.sleep(forTimeInterval: 1)
+//
+//        // cancellation state has to be manually checked
+//        guard thread.isCancelled == false else {
+//            print("Cancelled after interval")
+//
+//            return
+//        }
+//
+//        print("thread prop 2", Thread.current)
+//    }
+//
+//    // 0 to 1 (hidden definition of how threads get prioritized based on that)
+//    thread.threadPriority = 0.75
+//    thread.start()
+//
+//    // cancellation does not work as expected.. sleeping less then inside the thread context
+//    // still makes the thread block to fully perform its work without being cancelled
+//    Thread.sleep(forTimeInterval: 0.01)
+//    thread.cancel()
+//
+//    // freezes main thread, which will make the print on the detached
+//    // to be printed
+//    Thread.sleep(forTimeInterval: 1.1)
+//}
 
 // MARK: - Threads dictionaries
 

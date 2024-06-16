@@ -2,7 +2,7 @@
 <playground version='6.0' target-platform='ios' display-mode='raw'>
     <pages>
         <page name='TableOfContents'/>
-        <page name='WhatsNewInSwift'/>
+        <page name='MeetSwiftTesting'/>
         <page name='WhatsNewInXcode15'/>
         <page name='DemystifySwiftUIPerformance'/>
         <page name='BeyondTheBasicsOfStructuredConcurrency'/>
