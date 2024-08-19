@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:WWDC_2022.playground">
+   </FileRef>
+   <FileRef
+      location = "group:WWDC_2024.playground">
+   </FileRef>
+   <FileRef
+      location = "group:WWDC_2020.playground">
+   </FileRef>
+   <FileRef
+      location = "group:WWDC_2023.playground">
+   </FileRef>
+   <FileRef
+      location = "group:WWDC_2021.playground">
+   </FileRef>
+</Workspace>

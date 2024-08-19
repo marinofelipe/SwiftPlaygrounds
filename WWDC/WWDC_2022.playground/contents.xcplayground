@@ -2,8 +2,6 @@
 <playground version='6.0' target-platform='ios' display-mode='raw'>
     <pages>
         <page name='TableOfContents'/>
-        <page name='MeetSwiftTesting'/>
-        <page name='DemystifyExplicitlyBuiltModules'/>
-        <page name='WhatsNewInSwiftUI'/>
+        <page name='MeetDistributedActors'/>
     </pages>
 </playground>
