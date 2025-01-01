@@ -8,6 +8,7 @@
  ## Contents
 
  1. [Meet distributed actors in Swift](MeetDistributedActors)
+ 1. [Eliminate data races with Swift Concurrency)
 */
 
 //: [Next page](@next)
