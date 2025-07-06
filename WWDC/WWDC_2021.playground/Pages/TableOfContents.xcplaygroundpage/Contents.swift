@@ -1,9 +1,9 @@
 /*:
- # WWDC 2021
+ # WWDC 2025
 
  ## Intro
 
- This playground contains **WWDC 2020** notes and snippets from Keynote, "State of the union", and other chosen sessions.
+ This playground contains **WWDC 2025** notes and snippets from Keynote, "State of the union", and other chosen sessions.
 
  ## Contents
 
