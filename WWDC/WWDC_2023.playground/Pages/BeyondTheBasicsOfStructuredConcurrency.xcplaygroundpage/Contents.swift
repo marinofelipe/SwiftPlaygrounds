@@ -27,7 +27,7 @@
 
 // MARK: - cancellation
 
-Task.checkCancellation() // checks if the task is cancelled, and throws if so
+try Task.checkCancellation() // checks if the task is cancelled, and throws if so
 
 // can't guarantee the order of operations in an actor
 
@@ -43,7 +43,7 @@ Task.checkCancellation() // checks if the task is cancelled, and throws if so
 // also when escalated
 
 
-func run async throws {
+func run() async throws {
   // automatically releases resources and cancel tasks in the group
   withThrowingDiscardingTaskGroup { group in
     group.addTask {
